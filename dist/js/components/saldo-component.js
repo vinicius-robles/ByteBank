@@ -7,7 +7,7 @@ if (elementoDataAcesso != null) {
     elementoDataAcesso.textContent = formatarData(Conta.getDataAcesso(), FormatoData.DIA_SEMANA_DIA_MES_ANO);
 }
 renderizarSaldo();
-export function renderizarSaldo() {
+function renderizarSaldo() {
     if (elementoSaldo != null) {
         elementoSaldo.textContent = formatarMoeda(Conta.getSaldo());
     }

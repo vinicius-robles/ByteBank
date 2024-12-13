@@ -1,7 +1,7 @@
 import { TipoTransacao } from "./TipoTransacao.js";
 let saldo = JSON.parse(localStorage.getItem("saldo")) || 0;
 const transacoes = JSON.parse(localStorage.getItem("transacoes"), (key, value) => {
-    if (key == "data") {
+    if (key === "data") {
         return new Date(value);
     }
     return value;
@@ -11,7 +11,7 @@ function debitar(valor) {
         throw new Error("O valor a ser debitado deve ser maior que zero!");
     }
     if (valor > saldo) {
-        throw new Error("Valor insuficiente!");
+        throw new Error("Saldo insuficiente!");
     }
     saldo -= valor;
     localStorage.setItem("saldo", saldo.toString());
@@ -58,9 +58,10 @@ const Conta = {
         else if (novaTransacao.tipoTransacao == TipoTransacao.TRANSFERENCIA ||
             novaTransacao.tipoTransacao == TipoTransacao.PAGAMENTO_BOLETO) {
             debitar(novaTransacao.valor);
+            novaTransacao.valor *= -1;
         }
         else {
-            throw new Error("Tipo de transação é inválido!");
+            throw new Error("Tipo de Transação é inválido!");
         }
         transacoes.push(novaTransacao);
         console.log(this.getGruposTransacoes());
